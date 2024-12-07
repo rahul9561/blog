@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="container">
+ <h2>Welcome To   {{request.user.username}}</h2>   
+
+    <div class="row py-5">
+        <div class="col-md-6">
+            <form action="{% url 'home' %}" method="post" enctype="multipart/form-data">
+                {% if mess %}
+                <div class="alert alert-success" role="alert">
+                    {{mess}}
+                </div>
+                  
+                {% endif %}
+                
+                {% csrf_token %}
+               
+                <div class="form-group mb-3">
+                    <input type="file" name="{{blog.img.name}}" id="img" class="form-control" value="{{blog.img.name}}">
+                </div>
+                <div class="form-group mb-3">
+                    <input type="text" name="{{blog.title.name}}" id="img" class="form-control" value="{{blog.title.name}}">
+                </div>
+                <div class="form-group mb-3">
+                    <input type="text" name="{{blog.description.name}}" id="img" class="form-control" value="{{blog.description.name}}">
+                </div>
+               <button type="submit" class="btn btn-success">submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+  
+{% endblock  %}

@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block  content%}
+
+<div class="container">
+    <a href="{% url 'home' %}" class="btn btn-primary my-4">Add Blog</a>
+    <div class="row">
+
+        {% if blogs %}
+        {% for blog in blogs %}
+          
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{{blog.img.url}}" alt="" class="" style="width: 400px ;height: 350px; ">
+                <div class="card-body">
+                    <h5 class="card-title">{{blog.title}}</h5>
+                    <p class="card-text">{{blog.description}}</p>
+                    <a href="{% url 'edit-blog' id=blog.id %}" class="btn btn-warning">Edit</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+          
+        {% endif %}
+    </div>
+    
+</div>
+
+<div class="container">
+    
+    <div class="row justify-content-center mx-auto text-center py-4">
+        <nav aria-label="Page navigation example">
+            <ul class="pagination">
+                <!-- {% if blogs.has_previous %}
+                <li class="page-item"><a class="page-link" href="?page={{ blogs.previous_page_number }}">Previous</a></li>
+                  
+                {% endif %} -->
+
+              <!-- {% for blog in blogs %}
+              <li class="page-item"><a class="page-link" href="?page={{blog.id}}">{{blog.id}}</a></li>
+              
+              {% endfor %} -->
+              <!-- <span class="current">
+                <a href="?page={{blogs.number}}">{{ blogs.paginator.num_pages }}</a>
+            </span> -->
+            <!-- Page {{ blogs.number }} of {{ blogs.paginator.num_pages }}. -->
+            {% for num in blogs.paginator.page_range %}
+            {% if blogs.number == num %}
+            <span>{{num}}</span>
+           {% else %}
+           <a href="?page={{num}}">{{num}}</a>
+              
+            {% endif %}
+              
+            {% endfor %}
+
+              <!-- <li class="page-item"><a class="page-link" href="?page=1">1</a></li>
+              <li class="page-item"><a class="page-link" href="?page=2">2</a></li>
+              <li class="page-item"><a class="page-link" href="?page=3">3</a></li>
+              <li class="page-item"><a class="page-link" href="?page=4">4</a></li> -->
+
+              {% if blogs.has_next %}
+              <!-- <li class="page-item"><a class="page-link" href="?page={{ blogs.next_page_number }}">Next</a></li> -->
+             {% endif %}
+            </ul>
+          </nav>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

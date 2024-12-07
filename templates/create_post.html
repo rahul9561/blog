@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Blog Post</title>
+    {{ form.media }}  <!-- This includes CKEditor assets -->
+</head>
+<body>
+    <h1>Create a Blog Post</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>
